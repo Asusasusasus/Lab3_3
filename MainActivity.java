@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String countGen() {
+        double initialTime = System.nanoTime();
         Random rand = new Random();
         ArrayList<ArrayList<Integer>> popList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 delta[i] = Math.abs(yValue - popList.get(i).get(0) * aValue - popList.get(i).get(1) * bValue - popList.get(i).get(2) * cValue - popList.get(i).get(3) * dValue);
                 if (delta[i] == 0) {
                     return "x1 = " + popList.get(i).get(0) + "\nx2 = " + popList.get(i).get(1) + "\nx3 = " + popList.get(i).get(2) + "\nx4 = " + popList.get(i).get(3) +
-                            "\n\nEquation: " + aValue + " * " + popList.get(i).get(0) + " + " + bValue + " * " + popList.get(i).get(1) + " + " + cValue + " * " + popList.get(i).get(2) + " + " + dValue + " * " + popList.get(i).get(3) + " = " + yValue;
+                            "\n\nEquation: " + aValue + " * " + popList.get(i).get(0) + " + " + bValue + " * " + popList.get(i).get(1) + " + " + cValue + " * " + popList.get(i).get(2) + " + " + dValue + " * " + popList.get(i).get(3) + " = " + yValue + "\n" + "Time = " + (System.nanoTime() - initialTime)/1000000 + " ms\n";
                 }
                 sum += 1.0 / delta[i];
             }
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                             rand.nextInt(yValue / 2));
                 }
             }
-        } while (true);
+        } while ((System.nanoTime() - initialTime)/1000000 < 1000);
+        return "You're too slow";
     }
 }
